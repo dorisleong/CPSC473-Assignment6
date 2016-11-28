@@ -1,0 +1,16 @@
+{
+  "name": "assignment4",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "express": "~4.13.4",
+    "mongoose": "^4.6.5",
+    "mongoose-auto-increment": "^5.0.1",
+    "redis": "^2.6.2",
+    "socket.io": "^1.5.1"
+  }
+}

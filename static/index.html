@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assignment 5</title>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/trivia.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <!--show scores next to user-->
+        <div class="panel panel-default">
+          <div class="panel-heading">Online Users</div>
+          <ul class="list-group" id="onlineUsers">
+            <li>TestUser<span class="score"></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-9 col-md-10 ">
+        <h1>Trivia Game</h1>
+        <div class="join">
+          <h2>Join the game</h2>
+          <input type="text" placeholder="Username" id="username" />
+          <button class="btn" id="inputUsername">Submit</button>
+          <!--same username as another?-->
+          <p><span id="usernameError"></span></p>
+        </div>
+        <!--when submitted, show game-->
+        <div class="container-fluid">
+          <div class="game">
+            <p>The correct answer from last round was: <span id="correctAnswer"></span></p>
+            <button class="btn" id="start">Play</button>
+            <!--ready? show question-->
+            <div class="round">
+              <p>Time remaining: <span class="roundTime"></span></p>
+              <p><span id="question"></span></p>
+              <input type="text" placeholder="Answer" id="guess" />
+              <button class="btn" id="inputGuess">Submit</button>
+              <p><span id="result"></span></p>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <button class="btn" id="createShow">+ Create a question</button>
+          <div class="create">
+            <h2>Create your own question</h2>
+            <input type="text" placeholder="Question" id="newQuestion" />
+            <input type="text" placeholder="Answer" id="newAnswer" />
+            <button class="btn" id="addQuestion">Add Question</button>
+            <p><span id="addConfirmation"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="javascripts/app.js"></script>
+</body>
+
+</html>
