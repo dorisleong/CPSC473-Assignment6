@@ -68,6 +68,8 @@ var client = redis.createClient();
 client.on('connect', function() {
   'use strict';
   console.log('Connected to redis');
+  client.set('right', 0);
+  client.set('wrong', 0);
 });
 
 server.listen(3000);
@@ -89,7 +91,6 @@ io.sockets.on('connection', function(socket) {
         users[i].username = username;
       }
     }
-    client.set(username, '{right: 0, wrong: 0}');
   });
 
   socket.on('disconnect', function() {
@@ -172,10 +173,10 @@ app.post('/answer', function (req, res) {
   });
 });
 
-// Return user's score
+// Return score
 app.get('/score', function (req, res) {
   'use strict';
-  client.get(req.body.username, function(err, reply) {
+  client.mget('right','wrong', function(err, reply) {
     console.log(reply);
     res.json({
       right: reply[0],

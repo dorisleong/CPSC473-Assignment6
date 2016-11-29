@@ -79,8 +79,7 @@ var main = function () {
       type: 'GET',
       contentType: 'application/json',
       success: function (response) {
-        //TODO scores only for the user
-        $('.score').text(response.right+', '+response.wrong);
+        $('.score').text('Right: '+ response.right+', Wrong: '+response.wrong);
       }
     });
   }
@@ -122,6 +121,7 @@ var main = function () {
   $('#inputGuess').click(function() {
     postGuess();
     answered = true;
+    getScore();
   })
 
   $('#addQuestion').click(function() {
