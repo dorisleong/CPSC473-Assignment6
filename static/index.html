@@ -13,10 +13,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-        <!--show scores next to user-->
+        <!--show list of users-->
         <div class="panel panel-default">
           <div class="panel-heading">Online Users</div>
-          <ul class="list-group" id="onlineUsers">
+          <ul class="list-group" id="onlineUsers" data-bind="foreach: users">
             <li>TestUser</li>
           </ul>
         </div>
@@ -33,7 +33,7 @@
         <!--when submitted, show game-->
         <div class="container-fluid">
           <div class="game">
-            <p><span class="score"></span></p>
+            <p><span class="score" data-bind="text: score"></span></p>
             <p>The correct answer from last round was: <span id="correctAnswer"></span></p>
             <button class="btn" id="start">Play</button>
             <!--ready? show question-->
