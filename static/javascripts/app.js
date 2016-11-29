@@ -13,20 +13,22 @@ var main = function () {
   var ViewModel = function (userList, totalScore) {
     this.users = ko.observableArray(userList); // Initial users
     this.score = ko.observable(totalScore);
+
+      socket.on('update', function (users) {
+        userList = users;
+        // $('#onlineUsers').empty();
+        // for (var i = 0; i < userList.length; i++) {
+        //   if (userList[i].username != null) {
+        //     $('#onlineUsers').append('<li class="list-group-user">' + userList[i].username + '</li>');
+        //   }
+        // }
+      });
   };
 
   ko.applyBindings(new ViewModel(userList, currentScoreText));
 
   //Update the current list of players when one connects/disconnects
-  socket.on('update', function (users) {
-    userList = users;
-    // $('#onlineUsers').empty();
-    // for (var i = 0; i < userList.length; i++) {
-    //   if (userList[i].username != null) {
-    //     $('#onlineUsers').append('<li class="list-group-user">' + userList[i].username + '</li>');
-    //   }
-    // }
-  });
+
 
   var postAJAX = function (url, data, successFunction) {
     $.ajax({
@@ -138,7 +140,7 @@ var main = function () {
     postGuess();
     answered = true;
     getScore();
-  })
+  });
 
   $('#addQuestion').click(function () {
     postQuestion();
