@@ -37,13 +37,13 @@
           <div class="game">
             <p><span class="score" data-bind="text: score"></span></p>
             <p>The correct answer from last round was: <span id="correctAnswer"></span></p>
-            <button class="btn" id="start">Play</button>
+            <button class="btn" id="start"data-bind="click: userJoined">Play</button>
             <!--ready? show question-->
             <div class="round">
               <p>Time remaining: <span class="roundTime"></span></p>
               <p><span id="question"></span></p>
               <input type="text" placeholder="Answer" id="guess" />
-              <button class="btn" id="inputGuess" data-bind="click: computeScore">Submit</button>
+              <button class="btn" id="inputGuess" data-bind="click: submittedAnswer">Submit</button>
               <p><span id="result"></span></p>
             </div>
           </div>

@@ -10,22 +10,31 @@ var main = function () {
 
   //Knockout
 
-  var ViewModel = function (userList, totalScore) {
-    this.users = ko.observableArray(userList); // Initial users
-    this.score = ko.observable(totalScore);
+  var ViewModel = {
+    users: ko.observableArray(), // Initial users
+    score: ko.observable(),
 
-      socket.on('update', function (users) {
-        userList = users;
-        // $('#onlineUsers').empty();
-        // for (var i = 0; i < userList.length; i++) {
-        //   if (userList[i].username != null) {
-        //     $('#onlineUsers').append('<li class="list-group-user">' + userList[i].username + '</li>');
-        //   }
-        // }
+    userJoined: function () {
+      socket.on('update', function (updatedUsers) {
+        this.users.removeAll();
+        this.users.push(updatedUsers);
       });
+    },
+
+    submittedAnswer: function () {
+      $.ajax({
+        url: '/score',
+        dataType: 'json',
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (response) {
+          this.score = 'Right: ' + response.right + ', Wrong: ' + response.wrong;
+        }
+      });
+    }
   };
 
-  ko.applyBindings(new ViewModel(userList, currentScoreText));
+  ko.applyBindings(ViewModel);
 
   //Update the current list of players when one connects/disconnects
 
@@ -90,16 +99,16 @@ var main = function () {
 
   //Get score - after each answer submitted (GET /score) 
   var getScore = function () {
-    $.ajax({
-      url: '/score',
-      dataType: 'json',
-      type: 'GET',
-      contentType: 'application/json',
-      success: function (response) {
-        //$('.score').text('Right: ' + response.right + ', Wrong: ' + response.wrong);
-        currentScoreText = 'Right: ' + response.right + ', Wrong: ' + response.wrong;
-      }
-    });
+    // $.ajax({
+    //   url: '/score',
+    //   dataType: 'json',
+    //   type: 'GET',
+    //   contentType: 'application/json',
+    //   success: function (response) {
+    //     //$('.score').text('Right: ' + response.right + ', Wrong: ' + response.wrong);
+    //     currentScoreText = 'Right: ' + response.right + ', Wrong: ' + response.wrong;
+    //   }
+    // });
   }
 
   //start with game, round, create sections hidden
